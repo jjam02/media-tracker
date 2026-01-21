@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme=dark] *));
+
+:root {
+  --color-primary: #1e3a8a;
+  --color-primary-light: #3b82f6;
+  --color-secondary: #0f172a;
+  --color-accent: #60a5fa;
+  --color-success: #10b981;
+}
+
+body {
+  @apply bg-white dark:bg-slate-900 text-slate-900 dark:text-blue-100;
+}
+
+button {
+  @apply bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-colors;
+}
