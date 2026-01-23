@@ -2,30 +2,18 @@
 import type media from '../types/media';
 import MediaCard from './MediaCard';
 
-const sampleMediaList: media[] = [
-  {
-    id: '1',
-    title: 'Inception',
-    type: 'Movie',
-    status: 'Completed',
-    score: 9,
-  },
-  {
-    id: '2',
-    title: 'The Witcher',
-    type: 'TV Show',
-    status: 'Watching',
-    score: 8,
-  },
-];
+interface MediaGridProps {
+  mediaList: media[];
+}
 
 
-function MediaGrid() {
+function MediaGrid({ mediaList }: MediaGridProps) {
+  console.log("this is media list", mediaList);
   return (
     <>
       <h1>Your Media</h1>
       <div className="flex flex-row gap-2">
-        {sampleMediaList.map((mediaItem) => (
+        {mediaList.map((mediaItem) => (
           <MediaCard key={mediaItem.id} media={mediaItem} />
         ))}
       </div>

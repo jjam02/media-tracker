@@ -47,8 +47,3 @@ export default function MediaForm({ onClose }: MediaFormProps) {
     )
 
 }
-
-function test() {
-    console.log("test")
-
-}
