@@ -36,7 +36,7 @@ export default function MediaForm({ onClose }: MediaFormProps) {
                         <input type="number" id="score" name="rating" required placeholder="-" min="0" max="10" className="w-16 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         <span className="text-slate-900 dark:text-blue-100">/10</span>
                     </div>
-                    <button onClick={onClose} className="mt-4">Close</button>
+                    <button onClick={onClose} type="button" className="mt-4">Close</button>
                     <button type="submit" className="mt-4 ml-4">Submit</button>
                 </form>
 
