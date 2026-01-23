@@ -13,7 +13,7 @@ export default function MediaForm({ onClose }: MediaFormProps) {
                 onClick={(e) => e.stopPropagation()}
             >
                 <h2 className="text-2xl font-bold mb-4">Add Media</h2>
-                <form>
+                <form onSubmit={test}>
                     Title:<input type="text" placeholder="Title" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <label htmlFor="type-select">Type:</label>
                     <select name="type" id="type-select" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -29,15 +29,20 @@ export default function MediaForm({ onClose }: MediaFormProps) {
                         <option value="completed">completed</option>
                     </select>
                     Rating:<div className="flex items-center gap-2 mb-4">
-                        <input type="number" id="score" name="rating" placeholder="10" min="0" max="10" className="w-16 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <input type="number" id="score" name="rating" placeholder="-" min="0" max="10" className="w-16 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         <span className="text-slate-900 dark:text-blue-100">/10</span>
                     </div>
 
                 </form>
                 <button onClick={onClose} className="mt-4">Close</button>
                 <button type="submit" className="mt-4 ml-4">Submit</button>
+
             </div>
         </div>
     )
+
 }
 
+function test() {
+    console.log("test")
+}
