@@ -6,7 +6,7 @@ import MediaForm from "./MediaForm";
 interface MediaFormModalProps {
     showModal: boolean;
     setShowModal: (showModal: boolean) => void;
-    setMediaList: React.Dispatch<React.SetStateAction<import("../types/media").default[]>>;
+    setMediaList: React.Dispatch<React.SetStateAction<import("../types/media").Media[]>>;
 
 }
 

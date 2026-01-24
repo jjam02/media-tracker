@@ -6,7 +6,7 @@ interface HeaderProps {
   setShowModal: (showModal: boolean) => void;
   onToggleTheme: () => void;
   theme: 'light' | 'dark';
-  setMediaList: React.Dispatch<React.SetStateAction<import("../types/media").default[]>>;
+  setMediaList: React.Dispatch<React.SetStateAction<import("../types/media").Media[]>>;
 
 
 }

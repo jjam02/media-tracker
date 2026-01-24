@@ -1,4 +1,4 @@
-import type Media from "../types/media";
+import type { Media } from "../types/media";
 
 interface MediaFormProps {
     onClose: () => void;
