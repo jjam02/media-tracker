@@ -6,29 +6,15 @@ import MediaFormModal from './components/MediaFormModal'
 import './App.css'
 import './index.css'
 
-//------------SAMPLE DATA FOR TESTING PURPOSES----------------
-const sampleMediaList: Media[] = [
-  {
-    id: '1',
-    title: 'Inception',
-    type: 'Movie',
-    status: 'Completed',
-    score: 9,
-  },
-  {
-    id: '2',
-    title: 'The Witcher',
-    type: 'TV Show',
-    status: 'Watching',
-    score: 8,
-  },
-];
-//------------------------------------------------------------
+
+
+const mediaListFromStorage = localStorage.getItem('mediaList');
+
 
 
 function App() {
 
-  const [mediaList, setMediaList] = useState<Media[]>(sampleMediaList);
+  const [mediaList, setMediaList] = useState<Media[]>(mediaListFromStorage ? JSON.parse(mediaListFromStorage) : []);
   const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -41,6 +27,11 @@ function App() {
     document.querySelector('html')!.setAttribute('data-theme', "dark");
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('mediaList', JSON.stringify(mediaList));
+    console.log("Media list updated in localStorage");
+  }, [mediaList]);
+
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
       <Header
@@ -48,8 +39,9 @@ function App() {
         setShowModal={setShowModal}
         theme={theme}
         onToggleTheme={toggleTheme}
+        setMediaList={setMediaList}
       />
-      <MediaFormModal showModal={showModal} setShowModal={setShowModal} setMediaList={setMediaList} />
+
       <MediaGrid mediaList={mediaList} />
     </div>
   )

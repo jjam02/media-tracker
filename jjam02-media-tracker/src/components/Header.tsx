@@ -6,16 +6,17 @@ interface HeaderProps {
   setShowModal: (showModal: boolean) => void;
   onToggleTheme: () => void;
   theme: 'light' | 'dark';
+  setMediaList: React.Dispatch<React.SetStateAction<import("../types/media").default[]>>;
 
 
 }
 
-function Header({ showModal, setShowModal, onToggleTheme, theme }: HeaderProps) {
+function Header({ showModal, setShowModal, onToggleTheme, theme, setMediaList }: HeaderProps) {
   return (
     <header className="header">
       <h1 className="text-xl font-bold text-black dark:text-gray-300">Media Tracker</h1>
       <div className='flex justify-between gap-4'>
-        <MediaFormModal showModal={showModal} setShowModal={setShowModal} />
+        <MediaFormModal showModal={showModal} setShowModal={setShowModal} setMediaList={setMediaList} />
         <button id="themeToggle" onClick={onToggleTheme}>{theme === 'dark' ? 'light mode' : 'dark mode'}</button>
 
       </div>
