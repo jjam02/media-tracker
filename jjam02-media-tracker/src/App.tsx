@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type Media from './types/media';
+import type { Media, MediaFunctions } from './types/media';
 import Header from './components/Header'
 import MediaGrid from './components/MediaGrid'
 import MediaFormModal from './components/MediaFormModal'
@@ -32,6 +32,23 @@ function App() {
     console.log("Media list updated in localStorage");
   }, [mediaList]);
 
+  function deleteMedia(id: string) {
+    const updatedMediaList = mediaList.filter((media) => media.id !== id);
+    setMediaList(updatedMediaList);
+  }
+
+  function editMedia(id: string, updatedMedia: Partial<Media>) {
+    const updatedMediaList = mediaList.map((media) =>
+      media.id === id ? { ...media, ...updatedMedia } : media
+    );
+    setMediaList(updatedMediaList);
+  }
+
+  const mediaFunctions: MediaFunctions = {
+    editMedia,
+    deleteMedia
+  };
+
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
       <Header
@@ -42,7 +59,7 @@ function App() {
         setMediaList={setMediaList}
       />
 
-      <MediaGrid mediaList={mediaList} />
+      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} />
     </div>
   )
 }

@@ -5,3 +5,8 @@ export type Media = {
   status: string;
   score: number;
 };
+
+export type MediaFunctions = {
+  editMedia: (id: string, updatedMedia: Partial<Media>) => void;
+  deleteMedia: (id: string) => void;
+};
