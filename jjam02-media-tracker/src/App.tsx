@@ -49,7 +49,7 @@ function App() {
         theme={theme}
         onToggleTheme={toggleTheme}
       />
-      <MediaFormModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <MediaFormModal showModal={showModal} setShowModal={setShowModal} />
       <MediaGrid mediaList={mediaList} />
     </div>
   )
