@@ -71,3 +71,8 @@ function App() {
 }
 
 export default App
+
+// TOMORROW: edit media functionality
+// change the on submuit functions to not update the media in their components but instead call functions passed down from App.tsx that update the mediaList state there
+// RE FACTOR PROPS NAMES TO INCLUDE MULTIPLE FUNCTIONS OR CONTROLS WHERE NEEDED
+// test thoroughly after refactor
