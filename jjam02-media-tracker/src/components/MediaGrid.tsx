@@ -8,7 +8,7 @@ interface MediaGridProps {
 
 
 function MediaGrid({ mediaList }: MediaGridProps) {
-  console.log("this is media list", mediaList);
+  //console.log("this is media list", mediaList);
   return (
     <>
       <h1>Your Media</h1>

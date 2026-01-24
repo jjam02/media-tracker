@@ -1,12 +1,17 @@
 
-import { useState } from "react";
+
 import { createPortal } from "react-dom";
 import MediaForm from "./MediaForm";
 
+interface MediaFormModalProps {
+    showModal: boolean;
+    setShowModal: (showModal: boolean) => void;
+
+}
 
 
-function MediaFormModal() {
-    const [showModal, setShowModal] = useState(false);
+function MediaFormModal({ showModal, setShowModal }: MediaFormModalProps) {
+
     return (
         <div>
             <button onClick={() => setShowModal(true)}>Add Media</button>

@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import type media from './types/media';
 import Header from './components/Header'
 import MediaGrid from './components/MediaGrid'
-import MediaFormModal from './components/MediaFormModal'
 import './App.css'
 import './index.css'
 //------------SAMPLE DATA FOR TESTING PURPOSES----------------
@@ -25,13 +25,14 @@ const sampleMediaList: media[] = [
 
 
 function App() {
-
+  const [mediaList, setMediaList] = useState<media[]>(sampleMediaList);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <Header />
-      <MediaFormModal />
-      <MediaGrid mediaList={sampleMediaList} />
+      <Header showModal={showModal} setShowModal={setShowModal} />
+
+      <MediaGrid mediaList={mediaList} />
     </>
   )
 }
