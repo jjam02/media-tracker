@@ -2,7 +2,7 @@ import type Media from "../types/media";
 
 interface MediaFormProps {
     onClose: () => void;
-    setMediaList?: React.Dispatch<React.SetStateAction<Media[]>>;
+    setMediaList: React.Dispatch<React.SetStateAction<Media[]>>;
 }
 
 export default function MediaForm({ onClose, setMediaList }: MediaFormProps) {
@@ -28,7 +28,7 @@ export default function MediaForm({ onClose, setMediaList }: MediaFormProps) {
                         status: formData.get("status") as string,
                         score: Number(formData.get("rating")),
                     };
-                    setMediaList ? setMediaList(prev => [...prev, newMedia]) : null;
+                    setMediaList(prev => [...prev, newMedia]);
                     onClose();
                 }}>
                     Title:<input name="title" type="text" required placeholder="Title" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
