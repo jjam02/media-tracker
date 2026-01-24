@@ -1,9 +1,9 @@
 
-import type media from '../types/media';
+import type Media from '../types/media';
 import MediaCard from './MediaCard';
 
 interface MediaGridProps {
-  mediaList: media[];
+  mediaList: Media[];
 }
 
 
