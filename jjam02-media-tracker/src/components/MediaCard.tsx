@@ -7,11 +7,12 @@ type MediaCardProps = {
     media: Media
     mediaFunctions: MediaFunctions
     editModalControls: EditModalControls
+    setMediaList: React.Dispatch<React.SetStateAction<Media[]>>;
 
 };
 
 
-function MediaCard({ media, mediaFunctions, editModalControls }: MediaCardProps) {
+function MediaCard({ media, mediaFunctions, editModalControls, setMediaList }: MediaCardProps) {
     return (
         <div className='border-2 border-solid rounded-r-sm'>
             <h2>{media.title}</h2>
@@ -19,7 +20,7 @@ function MediaCard({ media, mediaFunctions, editModalControls }: MediaCardProps)
             <p>Status: {media.status}</p>
             <p>Score: {media.score}</p>
             <div className="flex flex-row gap-2">
-                <EditMediaFormModal showEditModal={editModalControls.showEditModal} setShowEditModal={editModalControls.setShowEditModal} setMediaList={() => { }} />
+                <EditMediaFormModal currentMedia={media} editModalControls={editModalControls} setMediaList={setMediaList} />
                 <button onClick={() => mediaFunctions.deleteMedia(media.id)} className=''>Delete</button>
             </div>
         </div >);

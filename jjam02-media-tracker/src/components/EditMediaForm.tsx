@@ -3,9 +3,10 @@ import type { Media } from "../types/media";
 interface MediaFormProps {
     onClose: () => void;
     setMediaList: React.Dispatch<React.SetStateAction<Media[]>>;
+    currentMedia: Media;
 }
 
-export default function MediaForm({ onClose, setMediaList }: MediaFormProps) {
+export default function MediaForm({ onClose, setMediaList, currentMedia }: MediaFormProps) {
     return (
         <div
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -28,17 +29,17 @@ export default function MediaForm({ onClose, setMediaList }: MediaFormProps) {
                         status: formData.get("status") as string,
                         score: Number(formData.get("rating")),
                     };
-                    setMediaList(prev => [...prev, newMedia]);
+                    setMediaList(prev => prev.map(media => media.id === currentMedia.id ? newMedia : media));
                     onClose();
                 }}>
-                    Title:<input name="title" type="text" required placeholder="Title" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    Title:<input name="title" type="text" required defaultValue={currentMedia.title} className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <label htmlFor="type-select">Type:</label>
-                    <select required name="type" id="type-select" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select required defaultValue={currentMedia.type} name="type" id="type-select" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">select a media format</option>
                         <option value="TV">TV</option>
                         <option value="Movie">Movie</option>
                     </select>
-                    Status:<select required name="status" id="status-select" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Status:<select required defaultValue={currentMedia.status} name="status" id="status-select" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">select a status</option>
                         <option value="planning">planning</option>
                         <option value="on-hold">on-hold</option>
@@ -46,7 +47,7 @@ export default function MediaForm({ onClose, setMediaList }: MediaFormProps) {
                         <option value="completed">completed</option>
                     </select>
                     Rating:<div className="flex items-center gap-2 mb-4">
-                        <input type="number" id="score" name="rating" required placeholder="-" min="0" max="10" className="w-16 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <input type="number" id="score" name="rating" required defaultValue={currentMedia.score} min="0" max="10" className="w-16 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         <span className="text-slate-900 dark:text-blue-100">/10</span>
                     </div>
                     <button onClick={onClose} type="button" className="mt-4">Close</button>

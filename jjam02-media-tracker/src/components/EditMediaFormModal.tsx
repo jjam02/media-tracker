@@ -1,22 +1,23 @@
 
 
 import { createPortal } from "react-dom";
+import type { Media, EditModalControls } from "../types/media";
 import EditMediaForm from "./EditMediaForm";
 
 interface EditMediaFormModalProps {
-    showEditModal: boolean;
-    setShowEditModal: (showEditModal: boolean) => void;
-    setMediaList: React.Dispatch<React.SetStateAction<import("../types/media").Media[]>>;
+    currentMedia: Media;
+    editModalControls: EditModalControls;
+    setMediaList: React.Dispatch<React.SetStateAction<Media[]>>;
 
 }
 
-function EditMediaFormModal({ showEditModal, setShowEditModal, setMediaList }: EditMediaFormModalProps) {
+function EditMediaFormModal({ currentMedia, editModalControls, setMediaList }: EditMediaFormModalProps) {
 
     return (
         <div>
-            <button onClick={() => setShowEditModal(true)}>Edit</button>
-            {showEditModal && createPortal(
-                <EditMediaForm onClose={() => setShowEditModal(false)} setMediaList={setMediaList} />,
+            <button onClick={() => editModalControls.setShowEditModal(true)}>Edit</button>
+            {editModalControls.showEditModal && createPortal(
+                <EditMediaForm onClose={() => editModalControls.setShowEditModal(false)} currentMedia={currentMedia} setMediaList={setMediaList} />,
                 document.body
             )}
         </div>

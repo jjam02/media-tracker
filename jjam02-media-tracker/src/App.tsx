@@ -65,7 +65,7 @@ function App() {
         setMediaList={setMediaList}
       />
 
-      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} editModalControls={editModalControls} />
+      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} editModalControls={editModalControls} setMediaList={setMediaList} />
     </div>
   )
 }
