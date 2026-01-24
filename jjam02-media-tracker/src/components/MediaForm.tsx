@@ -1,8 +1,11 @@
+import type Media from "../types/media";
+
 interface MediaFormProps {
     onClose: () => void;
+    setMediaList?: React.Dispatch<React.SetStateAction<Media[]>>;
 }
 
-export default function MediaForm({ onClose }: MediaFormProps) {
+export default function MediaForm({ onClose, setMediaList }: MediaFormProps) {
     return (
         <div
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -16,9 +19,19 @@ export default function MediaForm({ onClose }: MediaFormProps) {
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     // Save to localStorage
+                    const formData = new FormData(e.target as HTMLFormElement);
+                    console.log("Form submitted");
+                    const newMedia: Media = {
+                        id: Date.now().toString(),
+                        title: formData.get("title") as string,
+                        type: formData.get("type") as string,
+                        status: formData.get("status") as string,
+                        score: Number(formData.get("rating")),
+                    };
+                    setMediaList ? setMediaList(prev => [...prev, newMedia]) : null;
                     onClose();
                 }}>
-                    Title:<input type="text" required placeholder="Title" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    Title:<input name="title" type="text" required placeholder="Title" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     <label htmlFor="type-select">Type:</label>
                     <select required name="type" id="type-select" className="w-full mb-4 p-2 border border-blue-300 dark:border-blue-600 rounded dark:bg-slate-800 dark:text-blue-100 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">select a media format</option>
@@ -43,7 +56,7 @@ export default function MediaForm({ onClose }: MediaFormProps) {
 
 
             </div>
-        </div>
+        </div >
     )
 
 }
