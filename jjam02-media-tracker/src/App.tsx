@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { Media, MediaFunctions } from './types/media';
+import type { Media, MediaFunctions, EditModalControls } from './types/media';
 import Header from './components/Header'
 import MediaGrid from './components/MediaGrid'
-import MediaFormModal from './components/MediaFormModal'
 import './App.css'
 import './index.css'
 
@@ -16,6 +15,8 @@ function App() {
 
   const [mediaList, setMediaList] = useState<Media[]>(mediaListFromStorage ? JSON.parse(mediaListFromStorage) : []);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   const toggleTheme = () => {
@@ -49,6 +50,11 @@ function App() {
     deleteMedia
   };
 
+  const editModalControls: EditModalControls = {
+    showEditModal,
+    setShowEditModal
+  };
+
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
       <Header
@@ -59,7 +65,7 @@ function App() {
         setMediaList={setMediaList}
       />
 
-      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} />
+      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} editModalControls={editModalControls} />
     </div>
   )
 }
