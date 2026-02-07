@@ -19,11 +19,13 @@ function MediaCard({ media, mediaFunctions, editModalControls, setMediaList }: M
             <p>Type: {media.type}</p>
             <p>Status: {media.status}</p>
             <p>Score: {media.score}</p>
+            <button onClick={() => console.log(media)}>card </button>
             <div className="flex flex-row gap-2">
                 <EditMediaFormModal currentMedia={media} editModalControls={editModalControls} setMediaList={setMediaList} />
                 <button onClick={() => mediaFunctions.deleteMedia(media.id)} className=''>Delete</button>
             </div>
         </div >);
+
 }
 
 export default MediaCard;

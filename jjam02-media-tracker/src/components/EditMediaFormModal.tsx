@@ -1,6 +1,5 @@
-
-
 import { createPortal } from "react-dom";
+import { useEffect } from "react";
 import type { Media, EditModalControls } from "../types/media";
 import EditMediaForm from "./EditMediaForm";
 
@@ -13,9 +12,16 @@ interface EditMediaFormModalProps {
 
 function EditMediaFormModal({ currentMedia, editModalControls, setMediaList }: EditMediaFormModalProps) {
 
+    useEffect(() => {
+        if (editModalControls.showEditModal) {
+            console.log(`Edit modal opened for id=${currentMedia.id} title="${currentMedia.title}"`);
+        }
+    }, [editModalControls.showEditModal, currentMedia.id, currentMedia.title]);
+
     return (
         <div>
-            <button onClick={() => editModalControls.setShowEditModal(true)}>Edit</button>
+            <button onClick={() => console.log(currentMedia)}>modal </button>
+            <button onClick={() => { editModalControls.setShowEditModal(true); console.log("see im open"); }}>Edit</button>
             {editModalControls.showEditModal && createPortal(
                 <EditMediaForm onClose={() => editModalControls.setShowEditModal(false)} currentMedia={currentMedia} setMediaList={setMediaList} />,
                 document.body

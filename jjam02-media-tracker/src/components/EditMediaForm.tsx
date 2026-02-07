@@ -16,6 +16,7 @@ export default function MediaForm({ onClose, setMediaList, currentMedia }: Media
                 className="bg-white dark:bg-gray-800 rounded-lg drop-shadow-2xl p-6 w-11/12 max-w-2xl max-h-screen overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
             >
+                <button onClick={() => console.log(currentMedia)}>form </button>
                 <h2 className="text-2xl font-bold mb-4">Edit Media</h2>
                 <form onSubmit={(e) => {
                     e.preventDefault();
@@ -23,7 +24,7 @@ export default function MediaForm({ onClose, setMediaList, currentMedia }: Media
                     const formData = new FormData(e.target as HTMLFormElement);
                     console.log("Form submitted");
                     const newMedia: Media = {
-                        id: Date.now().toString(),
+                        id: currentMedia.id,
                         title: formData.get("title") as string,
                         type: formData.get("type") as string,
                         status: formData.get("status") as string,
