@@ -15,7 +15,7 @@ function MediaGrid({ mediaList, mediaFunctions, editModalControls, setMediaList 
   return (
     <>
       <h1>Your Media</h1>
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row flex-wrap m-2 gap-2">
         {mediaList.map((mediaItem) => (
           <MediaCard key={mediaItem.id} media={mediaItem} mediaFunctions={mediaFunctions} editModalControls={editModalControls} setMediaList={setMediaList} />
         ))}
