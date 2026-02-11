@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import '../MediaCard.css'
 import type { MediaFunctions, Media, EditModalControls } from '../types/media';
 import EditMediaFormModal from './EditMediaFormModal';
@@ -6,13 +7,19 @@ type MediaCardProps = {
 
     media: Media
     mediaFunctions: MediaFunctions
-    editModalControls: EditModalControls
+
     setMediaList: React.Dispatch<React.SetStateAction<Media[]>>;
 
 };
 
 
-function MediaCard({ media, mediaFunctions, editModalControls, setMediaList }: MediaCardProps) {
+function MediaCard({ media, mediaFunctions, setMediaList }: MediaCardProps) {
+    const [showEditModal, setShowEditModal] = useState(false);
+    const editModalControls: EditModalControls = {
+        showEditModal,
+        setShowEditModal
+    };
+
     return (
         <div className='border-2 border-solid rounded-r-sm'>
             <h2>{media.title}</h2>

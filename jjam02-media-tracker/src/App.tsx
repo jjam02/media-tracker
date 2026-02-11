@@ -15,7 +15,6 @@ function App() {
 
   const [mediaList, setMediaList] = useState<Media[]>(mediaListFromStorage ? JSON.parse(mediaListFromStorage) : []);
   const [showModal, setShowModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -50,10 +49,7 @@ function App() {
     deleteMedia
   };
 
-  const editModalControls: EditModalControls = {
-    showEditModal,
-    setShowEditModal
-  };
+
 
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
@@ -65,7 +61,7 @@ function App() {
         setMediaList={setMediaList}
       />
 
-      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} editModalControls={editModalControls} setMediaList={setMediaList} />
+      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} setMediaList={setMediaList} />
     </div>
   )
 }
