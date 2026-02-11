@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Media, MediaFunctions } from './types/media';
 import Header from './components/Header'
 import MediaGrid from './components/MediaGrid'
+import FilterList from './components/FilterList';
 import './App.css'
 import './index.css'
 
@@ -15,8 +16,13 @@ function App() {
 
   const [mediaList, setMediaList] = useState<Media[]>(mediaListFromStorage ? JSON.parse(mediaListFromStorage) : []);
   const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState<'All' | 'TV' | 'Movie'>('All');
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  const handleSetFilter = (currentFilter: 'All' | 'TV' | 'Movie') => {
+    setFilter(currentFilter);
+  }
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -60,8 +66,8 @@ function App() {
         onToggleTheme={toggleTheme}
         setMediaList={setMediaList}
       />
-
-      <MediaGrid mediaList={mediaList} mediaFunctions={mediaFunctions} setMediaList={setMediaList} />
+      <FilterList FilterSet={handleSetFilter} filter={filter} />
+      <MediaGrid mediaList={mediaList.filter(media => filter === 'All' || media.type === filter)} mediaFunctions={mediaFunctions} setMediaList={setMediaList} />
     </div>
   )
 }
