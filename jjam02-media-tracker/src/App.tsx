@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Media, MediaFunctions, EditModalControls } from './types/media';
+import type { Media, MediaFunctions } from './types/media';
 import Header from './components/Header'
 import MediaGrid from './components/MediaGrid'
 import './App.css'

@@ -1,5 +1,5 @@
 
-import type { Media, MediaFunctions, EditModalControls } from '../types/media';
+import type { Media, MediaFunctions } from '../types/media';
 import MediaCard from './MediaCard';
 
 interface MediaGridProps {
