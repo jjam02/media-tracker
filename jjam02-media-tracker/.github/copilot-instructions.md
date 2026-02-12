@@ -1,36 +1,50 @@
 # Copilot Instructions for jjam02-media-tracker
 
-## Project Overview
-This project is a media tracking application built with React, TypeScript, and Vite. It utilizes Tailwind CSS for styling and follows a component-based architecture.
+## Quick Summary
+Small React + TypeScript app scaffolded with Vite. Uses Tailwind for styling. UI is component-driven; data is plain TypeScript objects living in-memory (no backend).
 
-## Architecture
-- **Components**: The application is structured around reusable components such as `Header`, `MediaFormModal`, `MediaGrid`, and `MediaCard`. Each component is responsible for a specific part of the UI.
-- **Data Flow**: The main data structure is defined in `src/types/media.ts`, which outlines the properties of media items. Components like `MediaGrid` and `MediaCard` utilize this structure to display media information.
-- **State Management**: Local state is managed using React's `useState` hook, particularly in `MediaFormModal` for controlling modal visibility.
+## Architecture & Key Patterns
+- Components live in `src/components` (each file is a single component). Important components: `Header.tsx`, `MediaFormModal.tsx`, `MediaForm.tsx`, `MediaGrid.tsx`, `MediaCard.tsx`, `EditMediaForm.tsx`.
+- Types are in `src/types/media.ts` — use these types for props and state to stay consistent.
+- State & data flow: local state only. Parent components pass data and callbacks via props (e.g., `MediaGrid` receives an array of media and maps to `MediaCard`). Editing/adding flows use modals that pass `onClose` and callback props.
+- Modals: `MediaFormModal` and `EditMediaFormModal` use `createPortal` to mount outside the main DOM node — follow their pattern for new overlays.
 
-## Developer Workflows
-- **Development**: Use the command `npm run dev` to start the development server with hot module replacement (HMR).
-- **Building**: Run `npm run build` to compile the application for production.
-- **Linting**: Use `npm run lint` to check for code quality and adherence to defined ESLint rules.
-- **Preview**: After building, use `npm run preview` to serve the production build locally.
+## Developer Workflows (commands)
+- Start dev server: `npm run dev` (Vite with HMR).
+- Build production: `npm run build`.
+- Preview production build: `npm run preview`.
+- Lint: `npm run lint`.
 
-## Project Conventions
-- **File Structure**: Components are organized in the `src/components` directory, with each component in its own file. Type definitions are stored in `src/types`.
-- **Styling**: Tailwind CSS is used for styling, with utility classes applied directly in JSX. Custom styles can be defined in separate CSS files.
-- **TypeScript**: The project uses TypeScript for type safety. Ensure to define types for props and state where applicable.
+Check `package.json` for exact script names before automation.
+
+## Conventions & Style
+- Use TypeScript types from `src/types/media.ts` for media items and component props.
+- Keep components single-responsibility and file-scoped (one component per file).
+- Styling: prefer Tailwind utility classes directly in JSX; small overrides may live in companion CSS files (e.g., `MediaCard.css`).
+- Avoid introducing global state or new heavy dependencies — this project is intentionally minimal and local only.
 
 ## Integration Points
-- **External Dependencies**: The project relies on several key libraries:
-  - `react` and `react-dom` for building the UI.
-  - `vite` for the build tool and development server.
-  - `@tailwindcss/vite` for integrating Tailwind CSS.
+- No external API or database: media items are managed in-memory (check `App.tsx` for the main state). If you add persistence, note it's a cross-cutting change.
+- Major dependencies: `react`, `react-dom`, `vite`, Tailwind-related setup. Modify `vite.config.ts` only if changing build behavior.
 
-## Cross-Component Communication
-- Components communicate primarily through props. For example, `MediaFormModal` passes the `onClose` function to `MediaForm` to handle modal closure.
+## Common Tasks & Examples
+- Add a new component: create file in `src/components`, export default, add props typed with `src/types` where appropriate.
+- New form/modal: mirror `MediaFormModal.tsx` + `MediaForm.tsx` pattern — modal wrapper handles portal + backdrop; form manages inputs and calls `onSubmit`.
+- Editing flow: `MediaCard` triggers edit by lifting selected item to parent, then opens `EditMediaFormModal` with `initialValues` prop.
 
-## Examples
-- **Adding Media**: The `MediaFormModal` component demonstrates how to open a modal for adding new media items. It uses `createPortal` to render the modal outside the main DOM hierarchy.
-- **Displaying Media**: The `MediaGrid` component maps over a list of media items and renders a `MediaCard` for each item, showcasing how to display dynamic data.
+## What to watch for
+- There are no unit tests in the repo — be conservative with refactors and validate with the dev server.
+- Keep changes small and focused; update `src/types/media.ts` if you change the media shape and adjust all usages.
 
-## Conclusion
-These instructions should help AI coding agents understand the structure and workflows of the jjam02-media-tracker project, enabling them to assist effectively in development tasks.
+## Files to inspect when troubleshooting
+- [src/components/MediaFormModal.tsx](src/components/MediaFormModal.tsx) — modal + portal pattern.
+- [src/components/MediaForm.tsx](src/components/MediaForm.tsx) — form fields and submit handlers.
+- [src/components/MediaGrid.tsx](src/components/MediaGrid.tsx) and [src/components/MediaCard.tsx](src/components/MediaCard.tsx) — rendering and event wiring.
+- [src/types/media.ts](src/types/media.ts) — canonical media shape.
+- [vite.config.ts](vite.config.ts) — build config.
+
+## Final notes
+Be explicit in PRs about any changes to the media shape or global CSS; those are the highest-impact changes here.
+
+---
+If anything is missing or you'd like the instructions to include testing, CI, or a contributor checklist, tell me which area to expand.

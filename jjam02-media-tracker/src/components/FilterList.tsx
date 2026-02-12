@@ -1,18 +1,36 @@
 
+import './FilterList.css';
+
 interface FilterListProps {
     FilterSet: (filter: 'All' | 'TV' | 'Movie') => void;
     filter: 'All' | 'TV' | 'Movie';
 }
 
+function FilterList({ FilterSet, filter }: FilterListProps) {
+    const options: Array<{ key: 'All' | 'TV' | 'Movie'; label: string }> = [
+        { key: 'All', label: 'All' },
+        { key: 'TV', label: 'TV' },
+        { key: 'Movie', label: 'Movie' },
+    ];
 
-function FilterList({ FilterSet }: FilterListProps) {
-    return (<div className="flex flex-row gap-2 m-2">
-        Filter List Component
-        <button onClick={() => FilterSet('All')}>ALL</button>
-        <button onClick={() => FilterSet('TV')}>TV</button>
-        <button onClick={() => FilterSet('Movie')}>MOVIE</button>
+    return (
+        <div className="filter-list" role="group" aria-label="Filter media">
+            {options.map((opt) => {
+                const isActive = filter === opt.key;
 
-    </div>)
+                return (
+                    <button
+                        key={opt.key}
+                        onClick={() => FilterSet(opt.key)}
+                        className={`filter-btn ${isActive ? 'filter-btn--active' : 'filter-btn--inactive'}`}
+                        aria-pressed={isActive}
+                    >
+                        {opt.label}
+                    </button>
+                );
+            })}
+        </div>
+    );
 }
 
 

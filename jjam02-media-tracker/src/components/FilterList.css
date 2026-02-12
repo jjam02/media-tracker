@@ -1,0 +1,50 @@
+/* Styles for FilterList component */
+.filter-list {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin: 0.5rem;
+  align-items: center;
+}
+
+.filter-btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 80ms ease,
+    opacity 150ms ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.filter-btn--active {
+  /* lighter background, stronger text color */
+  background-color: #e8f0ff; /* pale blue */
+  color: #0b3d91; /* dark blue text */
+  box-shadow: 0 1px 2px rgba(11, 61, 145, 0.12);
+  opacity: 1;
+}
+
+.filter-btn--inactive {
+  /* muted / disabled look but still clickable */
+  background-color: transparent;
+  color: #6b7280; /* gray-500 */
+  border: 1px solid #e5e7eb; /* gray-200 */
+  opacity: 0.85;
+}
+
+.filter-btn--inactive:hover {
+  background-color: #f8fafc; /* subtle hover */
+  color: #374151; /* gray-700 on hover */
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+.filter-btn:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.25);
+  outline-offset: 2px;
+}
